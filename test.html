@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin:0; padding:0; box-sizing:border-box;}
+        html, body{
+            display:flex;
+            flex-wrap:wrap;
+            flex-direction:column;
+            justify-content:center;
+            overflow:hidden;
+            width:100%;
+            min-height:100vh;
+            background-color:#000;
+        }
+        #wrapper{
+            position:absolute;
+            overflow:hidden;
+            margin:0 auto;
+            height:50vh;
+            border:1px solid red;
+            aspect-ratio:1.5/1;
+        }
+        #swiper{
+            display:flex;
+            flex-wrap:nowrap;
+            position:relative;
+            transition:all .1s;
+            cursor:pointer;
+        }
+        #swiper li{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex:none;
+            position:relative;
+            height:50vh;
+            background-color:#fff;
+            border:1px solid #000;
+            font-size:5vw;
+            aspect-ratio:1/1;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <ul id="swiper">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+        </ul>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById("wrapper");
+        const swiper = document.getElementById("swiper");
+        // 자바스크립트 모바일 이벤트 : touchmove, touchend
+        let left_wrap = wrapper.getBoundingClientRect().left;
+        let hei = wrapper.offsetHeight;
+        let len = swiper.children.length;
+        let ul_wid = hei * len;
+        let per = hei / (window.innerHeight / 20);
+
+        console.log(hei, len);
+        window.addEventListener('resize', () => {
+            left_wrap = wrapper.getBoundingClientRect().left;
+            hei = wrapper.offsetHeight;
+            ul_wid = hei * len;
+            per = hei / (window.innerHeight / 20);
+        });
+
+        let pos = {prev:0, now:0, ul:0};
+        let order;
+        wrapper.addEventListener('touchmove', startSlider, false);
+        wrapper.addEventListener('touchend', adSlider, false);
+        function startSlider(e){
+            console.log("움직임");
+            e = e || widnow.event;
+            e.preventDefault();
+            console.log(e.changedTouches[0]);
+            pos.prev = e.changedTouches[0].clientX - left_wrap;
+            if(pos.prev > pos.now){
+                // 오른쪽으로 움직임
+                pos.ul += per;
+            }else{
+                // 왼쪽으로 움직임
+                pos.ul -= per;
+            }
+            moverSlider();
+            pos.now = pos.prev;
+        }
+
+        function moverSlider(){
+            swiper.style.transform = `translateX(${pos.ul}px)`;
+        }
+
+        function adSlider(){
+            // console.log("떨어짐");
+            order = Math.round((pos.ul / hei));
+            pos.ul = order * hei;
+            if(pos.ul > 0){
+                pos.ul = 0;
+            }
+            if(pos.ul < -(ul_wid - hei)){
+                pos.ul = -(ul_wid - hei);
+            }
+            moverSlider();
+        }
+        console.log(oreder);
+    </script>
+</body>
+</html>

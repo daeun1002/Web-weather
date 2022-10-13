@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 모바일 뷰포트 -->
+    <title>MY WEATHER</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav>
+            <form name="searchForm" id="searchForm">
+                <div class="searchBox">
+                    <input type="search" id="search" name="search" placeholder="검색">
+                    <span class="material-icons search">search</span>
+                </div>
+            </form>
+        </nav>
+        <h1 class="city-title">
+            <span class="material-icons">room</span>
+            <span id="place">place</span>
+        </h1>
+        <p id="ntime" class="text-center">0000년 00월 00일 00시</p>
+        <div class="row col-9 margin-auto">
+            <div class="col-6" id="iconbox">
+                <img src="images/01d.svg" id="weathericon" atl="01d">
+            </div>
+            <div class="col-6" id="nowtemp">19&deg;</div>
+            <div class="col-12 text-center">
+                <p id="max-minmaxtemp">23&deg;/12&deg;</p>
+                <p id="desc">좋은 날씨</p>
+            </div>
+        </div>
+        <div class="row light-blue py-20">
+            <div class="offset-1 col-5">
+                <ul>
+                    <li><i class="wi wi-sunrise"></i>해뜨는 시각 : <span id="sunrise"></span></li>
+                    <li><i class="wi wi-sunset"></i>해지는 시각 : <span id="sunset"></span></li>
+                    <li><i class="wi wi-strong-wind"></i>바람 : <span id="wind"></span></li>
+                </ul>
+            </div>
+            <div class="col-5">
+                <ul>
+                    <li><i class="wi wi-humidity"></i>습도 : <span id="humidity"></span></li>
+                    <li><i class="wi wi-cloudy"></i>구름 : <span id="cloud"></span></li>
+                    <li><i class="material-icons">accessibility</i>체감온도 : <span id="feellike"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" id="wrapper">
+            <ul id="wholeweather"></ul>
+        </div>
+    </div>
+
+    <script src="js/js.js"></script>
+</body>
+</html>
